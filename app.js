@@ -17,7 +17,7 @@ server.listen(port, function () {
     console.log('[system] Open | Port : ' + port)
 })
 
-mongoose.connect(config.MONGO_CONNECTION_STRING, { useNewUrlParser: true, autoReconnect: true, reconnectTries: Number.MAX_VALUE, reconnectInterval: 1000, dbName: config.MONGO_DB_NAME })
+mongoose.connect(config.MONGO_CONNECTION_STRING, { dbName: config.MONGO_DB_NAME })
 db.on('error', console.error)
 db.once('open', () => {
     console.log('[system] mongodb connect')
