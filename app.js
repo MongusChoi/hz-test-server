@@ -17,6 +17,8 @@ server.listen(port, function () {
     console.log('[system] Open | Port : ' + port)
 })
 
+app.get('/', (req, res) => { res.send('hi') })
+
 mongoose.connect(config.MONGO_CONNECTION_STRING, { dbName: config.MONGO_DB_NAME })
 db.on('error', console.error)
 db.once('open', () => {
