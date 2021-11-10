@@ -18,6 +18,7 @@ server.listen(port, function () {
 })
 
 app.get('/', (req, res) => { res.send('hi') })
+app.use('/api', require('./router/api'))
 
 mongoose.connect(config.MONGO_CONNECTION_STRING, { dbName: config.MONGO_DB_NAME })
 db.on('error', console.error)
