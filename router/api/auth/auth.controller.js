@@ -1,6 +1,6 @@
 const userDB = require('../../../models/users')
 
-exports.SignUp = (req, res) => {
+exports.SignUp = async (req, res) => {
     const {
         name,
         id,
@@ -17,7 +17,7 @@ exports.SignUp = (req, res) => {
     } = req.body
 
     try {
-        userDB.Create({
+        await userDB.Create({
             name,
             id,
             password,
@@ -30,7 +30,7 @@ exports.SignUp = (req, res) => {
             emailChecked,
             smsChecked,
             appChecked
-        })   
+        })
 
         res.send('success')
     } catch (e) {
