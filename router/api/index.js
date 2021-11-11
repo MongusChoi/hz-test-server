@@ -1,7 +1,8 @@
 const router = require('express').Router()
 
 const path = [
-    '/auth'
+    '/auth',
+    '/comment'
 ]
 
 path.forEach(item => router.use(item, require(`.${item}`)))
