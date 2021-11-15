@@ -1,4 +1,23 @@
 const userDB = require('../../../models/users')
+const jwt = require('jsonwebtoken')
+const config = require('../../../global')
+
+const issueToken = (user) => {
+    const { _id } = user
+
+    return new Promise((resolve, reject) => {
+        jwt.sign(
+            { _id },
+            config.SECRET,
+            { expiresIn: '12h', issuer: 'mongus' },
+            (err, token) => {
+                if (err) return reject(err)
+                else {
+                    return resolve(token)
+                }
+            })
+    })
+}
 
 exports.SignUp = async (req, res) => {
     const {
@@ -37,4 +56,11 @@ exports.SignUp = async (req, res) => {
         console.log(e)
         res.status(500).send('Server Error')
     }
+}
+
+exports.SignIn = async (req, res) => {
+    const { _id } = req.user
+    console.log(req)
+    const token = await issueToken(req.user)
+    res.send({ token })
 }
