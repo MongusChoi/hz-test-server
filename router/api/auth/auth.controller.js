@@ -60,7 +60,6 @@ exports.SignUp = async (req, res) => {
 
 exports.SignIn = async (req, res) => {
     const { _id } = req.user
-    console.log(req)
     const token = await issueToken(req.user)
     res.send({ token })
 }

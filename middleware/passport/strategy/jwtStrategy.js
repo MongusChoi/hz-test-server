@@ -8,7 +8,6 @@ module.exports = new Strategy({
   issuer: 'mongus'
 }, async (payload, done) => {
   try {
-    console.log(payload._id)
     const isExist = await UserDB.IsExist({ _id: payload._id })
 
     if (!isExist) done(null, false)
