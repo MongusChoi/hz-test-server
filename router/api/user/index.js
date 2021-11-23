@@ -5,5 +5,6 @@ const passport = require('passport')
 router.use(passport.authenticate('jwt'))
 
 router.get('/nickname', controller.GetNickname)
+router.get('/mypage', controller.GetMyData)
 
 module.exports = router
