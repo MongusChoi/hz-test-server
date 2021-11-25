@@ -25,7 +25,7 @@ exports.CreateBoard = async (req, res) => {
     const { title, body } = req.body
 
     try {
-        if (!title || !body) res.status(400).send('Bad Request Body')
+        if (!title || !body) return res.status(400).send('Bad Request Body')
         boardDB.Create({ title, body, author: _id })
         res.send('Success')
     } catch (e) {
@@ -38,7 +38,7 @@ exports.GetBoardItem = async (req, res) => {
     const { id } = req.params
 
     try {
-        if (!id || id.length !== 24) res.status(400).send('Bad Request Query Parameter')
+        if (!id || id.length !== 24) return res.status(400).send('Bad Request Query Parameter')
         const result = await boardDB.GetItem({ _id: id })
         res.send(result)
     } catch (e) {
