@@ -17,5 +17,12 @@ module.exports = {
         const { _id } = param
 
         return (await userColl.countDocuments({ _id: new ObjectId(_id) })) > 0
+    },
+
+    GetNicknameById: async (param = {}) => {
+        const { _id } = param
+
+        const { name } = await userColl.findOne({ _id })
+        return name
     }
 }
