@@ -14,7 +14,8 @@ module.exports = {
             title,
             body,
             author: new ObjectId(author),
-            createdAt: new Date()
+            createdAt: new Date(),
+            isDeleted: false
         })
 
     }

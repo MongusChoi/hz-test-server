@@ -1,10 +1,10 @@
-const userDB = require('../../../models/users')
+const UserDB = require('../../../models/users')
 
 exports.GetNickname = async (req, res) => {
     const { _id } = req.user
 
     try {
-        const { name } = await userDB.GetItem({ _id })
+        const { name } = await UserDB.GetItem({ _id })
         res.send({ nickname: name })
     } catch (e) {
         console.log(e)
@@ -16,10 +16,15 @@ exports.GetMyData = async (req, res) => {
     const { _id } = req.user
 
     try {
-        const result = await userDB.GetItem({ _id })
+        const result = await UserDB.GetItem({ _id })
         res.send(result)
     } catch (e) {
         console.log(e)
         res.status(500).send('server error')
     }
+}
+
+exports.GetUserData = (req, res) => {
+    const { _id } = req.user
+    res.send({ _id })
 }

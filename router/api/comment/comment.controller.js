@@ -1,4 +1,4 @@
-const commentDB = require('../../../models/comment')
+const CommentDB = require('../../../models/comment')
 
 exports.GetComment = async (req, res) => {
     let { offset, limit } = req.query
@@ -9,7 +9,7 @@ exports.GetComment = async (req, res) => {
     const skip = offset * limit
 
     try {   
-        const result = await commentDB.GetList({ skip, limit })
+        const result = await CommentDB.GetList({ skip, limit })
         res.send(result)
     } catch (e) {
         console.log(e)
@@ -24,7 +24,7 @@ exports.CreateComment = async (req, res) => {
         if (!nickname) res.status(400).send('닉네임이 없음')
         if (!commentValue) res.status(400).send('코멘트가 없음')
 
-        commentDB.Create({ nickname, commentValue })
+        CommentDB.Create({ nickname, commentValue })
         res.send('Success')
     } catch (e) {
         console.log(e)

@@ -8,5 +8,7 @@ router.use(passport.authenticate('jwt'))
 
 router.get('/:id', controller.GetBoardItem)
 router.post('/', controller.CreateBoard)
+router.patch('/:id', controller.UpdateBoardItem)
+router.delete('/:id', controller.DeleteBoardItem)
 
 module.exports = router
