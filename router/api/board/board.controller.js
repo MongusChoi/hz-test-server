@@ -8,9 +8,9 @@ exports.GetBoardList = async (req, res) => {
 
         if (Array.isArray(boards) && boards.length > 0) {
             result = await Promise.all(boards.map(async item => {
-                const { _id, title, author, createdAt } = item
+                const { _id, title, author, createdAt, isDeleted } = item
                 const nickname = await UserDB.GetNicknameById(author)
-                return { _id, title, author, createdAt, nickname }
+                return { _id, title, author, createdAt, nickname, isDeleted }
             }))
         }
         res.send(result)
