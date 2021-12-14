@@ -13,5 +13,9 @@ module.exports = {
     GetItem: async (param = {}) => {
         const { _id } = param
         return await boardColl.findOne({ _id: new ObjectId(_id) })
+    },
+
+    GetCount: (param = {}) => {
+        return boardColl.countDocuments({})
     }
 }

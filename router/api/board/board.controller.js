@@ -20,7 +20,8 @@ exports.GetBoardList = async (req, res) => {
                 return { _id, title, author, createdAt, nickname, isDeleted }
             }))
         }
-        res.send(result)
+        const count = await BoardDB.GetCount({})
+        res.send({ list: result, count })
     } catch (e) {
         console.log(e)
         res.status(500).send('Server Error')
