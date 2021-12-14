@@ -2,8 +2,15 @@ const BoardDB = require('../../../models/board')
 const UserDB = require('../../../models/users')
 
 exports.GetBoardList = async (req, res) => {
+    let { offset, limit } = req.query
+
+    offset = isNaN(offset) ? 0 : Number(offset)
+    limit = isNaN(limit) ? 12 : Number(limit)
+
+    const skip = offset * limit
+
     try {
-        const boards = await BoardDB.GetList()
+        const boards = await BoardDB.GetList({}, { skip, limit })
         let result
 
         if (Array.isArray(boards) && boards.length > 0) {
@@ -65,7 +72,7 @@ exports.UpdateBoardItem = async (req, res) => {
 
 exports.DeleteBoardItem = async (req, res) => {
     const { id } = req.params
-    
+
     try {
         if (!id || id.length !== 24) return res.status(400).send('Bad Request Query Parameter')
         const result = await BoardDB.DeleteItem({ _id: id })

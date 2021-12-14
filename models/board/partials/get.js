@@ -3,9 +3,11 @@ const { connection } = require('mongoose')
 const boardColl = connection.collection('boards')
 
 module.exports = {
-    GetList: async (param = {}) => {
+    GetList: async (param = {}, options = {}) => {
         const {} = param
-        return await boardColl.find({}).toArray()
+        const { skip, limit } = options
+
+        return await boardColl.find({}, { skip, limit }).toArray()
     },
 
     GetItem: async (param = {}) => {
